@@ -1,94 +1,162 @@
-================= Term of Use =================
+File Location Assumption:
+ - train_file = "./COMP30027_2021_Project2_datasets/recipe_train.csv"
+ - test_file = "./COMP30027_2021_Project2_datasets/recipe_test.csv"
+ - count_vec_folder = './COMP30027_2021_Project2_datasets/recipe_text_features_countvec/' - consists:
+    - train_name_countvectorizer.pkl
+    - train_steps_countvectorizer.pkl
+    - train_ingr_countvectorizer.pkl
+    - train_name_vec.npz
+    - test_name_vec.npz
+    - train_steps_vec.npz
+    - test_steps_vec.npz
+    - train_ingr_vec.npz
+    - test_ingr_vec.npz
 
-The data has been collected from Food.com (formerly GeniusKitchen), under the provision that any resulting work should cite this resource:
+File Generated: All files is in the same folder as all the notebooks
+    - Count_Vectoriser_Real_DataSet.ipynb:
+        - All Features (all matrices & n_steps & n_ingredients):
+            - df_CV_res_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+            - df_CV_res_Decision Tree_full.csv (using Decision Tree for prediction)
+            - df_CV_res_Logistic Regression_full.csv (using Logistic Regression for prediction)
+$$$$ - df_CV_stack1_Log_Reg.csv/ df_CV_stack_sklearn_Log_Reg.csv (Stacking, Meta: Logistic Regression, Base: Multinomial Naive Bayes + Decision Tree)
+        - Chi-Square, k=1000:
+            - df_CV_res_chi2_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+            - df_CV_res_chi2_Decision Tree_full.csv (using Decision Tree for prediction)
+            - df_CV_res_chi2_Logistic Regression_full.csv (using Logistic Regression for prediction)
+            - df_CV_chi2_stack1_Log_Reg.csv/ df_CV_chi2_stack_sklearn_Log_Reg.csv (Stacking, Meta: Logistic Regression, Base: Multinomial Naive Bayes + Decision Tree)
+$$$ - df_CV_chi2_stack1_Log_Reg.csv/ TFIDF_Real_DataSet.ipynb :
+        - All Features (all matrices & n_steps & n_ingredients):
+            - df_TFIDF_res_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+            - df_TFIDF_res_Decision Tree_full.csv (using Decision Tree for prediction)
+            - df_TFIDF_res_Logistic Regression_full.csv (using Logistic Regression for prediction)
+$$$$ - df_TFIDF_stack1_Log_Reg.csv/ df_TFIDF_stack_sklearn_Log_Reg.csv 
+        - Chi-Square, k=1000:
+            - df_TFIDF_res_chi2_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+            - df_TFIDF_res_chi2_Decision Tree_full.csv (using Decision Tree for prediction)
+            - df_TFIDF_res_chi2_Logistic Regression_full.csv (using Logistic Regression for prediction)
+$$$$ - df_TFIDF_chi2_stack1_Log_Reg.csv/ df_TFIDF_chi2_stack_sklearn_Log_Reg.csv (Stacking, Meta: Logistic Regression, Base: Multinomial Naive Bayes + Decision Tree)
 
-Generating Personalized Recipes from Historical User Preferences. Bodhisattwa Prasad Majumder, Shuyang Li, Jianmo Ni, Julian McAuley, in Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP), 2019.
 
+(1) Count_Vectoriser_Real_DataSet.ipynb
+        Uses Count Vectoriser for 'name', 'steps' & 'ingredients' text features in recipe_train.csv & recipe_test.csv
 
-================= Files =================
+To Run (1):
+1. Run cell under 'Raw Train & Test DataSet'
+2. Run cell under 'Count Vectoriser for text features'
+3. Run cell under 'Stacking from W8 Prac'
+4. Run cell under 'Individual Classifiers - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from  'name', 'steps' & 'ingredients' - Count Vectorizer
+    - Multinomial Naive Bayes, Decision Tree, Logistic Regression Used
+    - Resulting prediction csv file :
+        - df_CV_res_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+        - df_CV_res_Decision Tree_full.csv (using Decision Tree for prediction)
+        - df_CV_res_Logistic Regression_full.csv (using Logistic Regression for prediction)
+5. Run cell under 'Stacking - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from 'name', 'steps' & 'ingredients'
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Resulting prediction csv file :
+$$$$ - df_CV_stack1_Log_Reg.csv/ df_CV_stack_sklearn_Log_Reg.csv 
+6. Run cell under 'CHI SQUARE , K=1000' : for feature selection 
+7. Run cell under 'Individual Classifiers - CHI SQUARE, K=1000'
+    - Using 1000 best features selected using chi square
+    - Resulting prediction csv file :
+        - df_CV_res_chi2_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+        - df_CV_res_chi2_Decision Tree_full.csv (using Decision Tree for prediction)
+        - df_CV_res_chi2_Logistic Regression_full.csv (using Logistic Regression for prediction)
+8. Run cell under 'Stacking - CHI SQUARE , K =1000'
+    - Using 1000 best features selected using chi square
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Resulting prediction csv file :
+$$$$ - df_CV_chi2_stack1_Log_Reg.csv/ df_CV_chi2_stack_sklearn_Log_Reg.csv
 
-1. recipe_train.csv
-This file contains the recipe features and label for training instances.
-Number of instances: 40000
-Number of columns: 6
-The columns are (the column names are in the first row):
-	name, n_steps, n_ingredients, steps, ingredients, duration_label
+(2) TFIDF_Real_DataSet.ipynb
+        Uses TF-IDF Vectoriser for 'name', 'steps' & 'ingredients' text features in recipe_train.csv & recipe_test.csv
 
-The columns name, steps and ingredients contain the raw text data of these features.
+To Run (2):
+1. Run cell under 'TF-IDF on Text Features'
+2. Run cell under 'Stacking from W8 Prac'
+3. Run cell under 'Individual Classifiers - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from 'name', 'steps' & 'ingredients' - TFIDF vectorizer
+    - Multinomial Naive Bayes, Decision Tree, Logistic Regression Used
+    - Resulting prediction csv file :
+        - df_TFIDF_res_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+        - df_TFIDF_res_Decision Tree_full.csv (using Decision Tree for prediction)
+        - df_TFIDF_res_Logistic Regression_full.csv (using Logistic Regression for prediction)
+4. Run cell under 'Stacking - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from 'name', 'steps' & 'ingredients'
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Resulting prediction csv file :
+$$$$ - df_TFIDF_stack1_Log_Reg.csv/ df_TFIDF_stack_sklearn_Log_Reg.csv 
+5. Run cell under 'CHI SQUARE , K=1000' : for feature selection
+6. Run cell under 'Individual Classifiers - CHI SQUARE, K=1000'
+    - Using 1000 best features selected using chi square
+    - Resulting prediction csv file :
+        - df_TFIDF_res_chi2_MNB_full.csv (using Multinomial Naive Bayes for prediction)
+        - df_TFIDF_res_chi2_Decision Tree_full.csv (using Decision Tree for prediction)
+        - df_TFIDF_res_chi2_Logistic Regression_full.csv (using Logistic Regression for prediction)
+7. Run cell under 'Stacking - CHI SQUARE , K =1000'
+    - Using 1000 best features selected using chi square
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Resulting prediction csv file :
+$$$$ - df_TFIDF_chi2_stack1_Log_Reg.csv/ df_TFIDF_chi2_stack_sklearn_Log_Reg.csv
 
-The class label is in the last column: duration_label. There are 3 possible levels, 1, 2 or 3, which correspond to quick, medium and slow.
+(3) Count_Vectoriser_TrainTestSplit.ipynb:
+        Split recipe_train.csv to train & test , where test = 0.33 - for testing & initial accuracy purpose
+        Uses Count Vectoriser for 'name', 'steps' & 'ingredients' text features
 
-2. recipe_test.csv
-This file contains the recipe features for test instances.
-Number of instances: 10000
-Number of columns: 5
-The columns are (the column names are in the first row):
-	name, n_steps, n_ingredients, steps, ingredients
+To Run (3):
+1. Run cell under 'Train Test Split on recipe_train.csv'
+2. Run cell under 'Stacking from W8 Prac'
+3. Run cell under 'Individual Classifiers - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from 'name', 'steps' & 'ingredients'
+    - Multinomial Naive Bayes, Decision Tree, Logistic Regression Used
+    - Result: Accuracy & Time run using each classifier
+4. Run cell under 'Stacking - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from 'name', 'steps' & 'ingredients'
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Result: Accuracy & Time run for Stacking
+5. Run cell under 'CHI SQUARE , K=1000' : for feature selection 
+6. Run cell under 'Individual Classifiers - CHI SQUARE, K=1000'
+    - Using 1000 best features selected using chi square
+    - Multinomial Naive Bayes, Decision Tree, Logistic Regression Used
+    - Result: Accuracy & Time run using each classifier on 1000 features from feature selection
+7. Run cell under 'Stacking - CHI SQUARE , K =1000'
+    - Using 1000 best features selected using chi square
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Result: Accuracy & Time run for Stacking
 
+(4) TFIDF_TrainTestSplit.ipynb:
+        Split recipe_train.csv to train & test , where test = 0.33 - for testing & initial accuracy purpose
+        Uses TF IDF Vectoriser for 'name', 'steps' & 'ingredients' text features
 
-3. recipe_text_features_*.zip: preprocessed text features for training and test sets, 1 zipped file for each text encoding method
-
-3.1 recipe_text_features_countvec.zip
-9 files
-(1) train_name_countvectorizer.pkl
-This file contains the CountVectorizer extracted using the text of the recipe "name" in the training set.
-To load the file in Python:
-	vocab = pickle.load(open("train_name_countvectorizer.pkl", "rb"))
-	
-To access the list of vocabulary (this will give you a dict):
-	vocab_dict = vocab.vocabulary_
-	
-More about how to use the CountVectorizer can be found: https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
-
-(2) train_steps_countvectorizer.pkl
-This file contains the CountVectorizer extracted using the text of the recipe "steps" in the training set.
-
-(3) train_ingr_countvectorizer.pkl
-This file contains the CountVectorizer extracted using the text of the recipe "ingredients" in the training set.
-
-(4) train_name_vec.npz
-This file contains a sparse matrix of the Bag-of-Word representation of the recipe names for training data.
-The dense version of this matrix should be [40000 * size of vocabulary], and the element (i,j) in the matrix is the count of each vocabulary term j in instance i. The vocabulary corresponds to the vocabulary_ attribute of vocab (which can be checked as detailed in (1))
-
-As a lot of elements in this matrix are zeros, it has been compressed to a sparse matrix. After loading, the sparse matrix can be used as a normal matrix for training or testing.
-
-To load the sparse matrix:
-	import scipy
-	scipy.sparse.load_npz('train_name_vec.npz')
-
-train_steps_vec.npz and train_ingr_vec.npz are the sparse matrices for recipe steps and ingredients, respectively.
-
-(5) test_name_vec.npz
-This file contains a sparse matrix of the Bag-of-Word representation of the recipe names for test data. 
-The dense version of this matrix should be [10000 * size of vocabulary]. The vocabulary is the one that has been extracted from training, but the elements in this matrix are the counts for each recipe in the test set.
-
-To load the sparse matrix:
-	import scipy
-	scipy.sparse.load_npz('test_name_vec.npz')
-	
-test_steps_vec.npz and test_ingr_vec.npz are the sparse matrices for recipe steps and ingredients, respectively.
-
-3.2 recipe_text_features_doc2vec50.zip
-6 files
-(1) train_name_doc2vec50.csv
-This file contains a matrix of Doc2Vec representation of the recipe names for training data, with 50 features.
-The dimension of this matrix is [40000 * 50], and the element (i,j) in the matrix is a numeric value for feature j of an instance i. 
-
-To load the matrix:
-	import pandas as pd
-	pd.read_csv(r"train_name_doc2vec50.csv", index_col = False, delimiter = ',', header=None)
-
-train_steps_doc2vec50.csv and train_ingr_doc2vec50.csv are the matrices for recipe steps and ingredients, respectively.
-
-(2) test_name_doc2vec50.csv
-This file contains a matrix of Doc2Vec representation of the recipe names for test data, with 50 features extracted from the training data.
-The dimension of this matrix is [10000 * 50], and the element (i,j) in the matrix is a numeric value for feature j of an instance i. 
-
-To load the matrix:
-	import pandas as pd
-	pd.read_csv(r"test_name_doc2vec50.csv", index_col = False, delimiter = ',', header=None)
-
-test_steps_doc2vec50.csv and test_ingr_doc2vec50.csv are the matrices for recipe steps and ingredients, respectively.
-
-3.3 recipe_text_features_doc2vec100.zip
-Similar to recipe_text_features_doc2vec50, except that 100 features are used for each instance
+To Run (4):
+1. Run cell under 'Train Test Split on recipe_train.csv'
+2. Run cell under 'Stacking from W8 Prac'
+3. Run cell under 'Individual Classifiers - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from 'name', 'steps' & 'ingredients'
+    - Multinomial Naive Bayes, Decision Tree, Logistic Regression Used
+    - Result: Accuracy & Time run using each classifier
+4. Run cell under 'Stacking - All features'
+    - Using all features including n_steps, n_ingredients, & all matrices generated from 'name', 'steps' & 'ingredients'
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Result: Accuracy & Time run for Stacking
+5. Run cell under 'CHI SQUARE , K=1000' : for feature selection 
+6. Run cell under 'Individual Classifiers - CHI SQUARE, K=1000'
+    - Using 1000 best features selected using chi square
+    - Multinomial Naive Bayes, Decision Tree, Logistic Regression Used
+    - Result: Accuracy & Time run using each classifier on 1000 features from feature selection
+7. Run cell under 'Confusion Matrix for TFIDF - CHI SQUARE K=1000'
+    - Display Confusion Matrix for Classification using Decision Tree, on 1000 features from chi square feature selection
+8. Run cell under 'Stacking - CHI SQUARE , K =1000'
+    - Using 1000 best features selected using chi square
+    - Base Learners: Decision Tree & Multinomial Naive Bayes
+    - Meta Learner : Logistic Regresssion
+    - Result: Accuracy & Time run for Stacking
+        
